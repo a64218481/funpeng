@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>尴尬问题大挑战</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #4a90e2;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        .choice {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+        .choice:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+        .result {
+            margin: 20px 0;
+            font-size: 1.1em;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>尴尬问题大挑战</h1>
+        <p class="question" id="question">你正在吃一个汉堡，突然发现里面有一只小虫子，你会怎么办？</p>
+        <div id="choices">
+            <div class="choice" onclick="revealAnswer(1)">继续吃，假装没看见</div>
+            <div class="choice" onclick="revealAnswer(2)">扔掉汉堡，大喊大叫</div>
+            <div class="choice" onclick="revealAnswer(3)">把虫子夹出来，继续吃</div>
+        </div>
+        <div id="result" class="result hidden"></div>
+    </div>
+
+    <script>
+        function revealAnswer(choice) {
+            const resultElement = document.getElementById("result");
+            const choicesElement = document.getElementById("choices");
+
+            choicesElement.style.display = "none"; // Hide choices after selection
+            resultElement.classList.remove("hidden");
+
+            switch (choice) {
+                case 1:
+                    resultElement.textContent = "哈哈，你真是个勇士！不过，你的肠胃可能不同意。";
+                    break;
+                case 2:
+                    resultElement.textContent = "你成功引起了全场的注意，现在大家都盯着你看……";
+                    break;
+                case 3:
+                    resultElement.textContent = "哇哦，你太冷静了！不过，你的朋友可能会觉得你有点……恶心。";
+                    break;
+                default:
+                    resultElement.textContent = "你选择了不存在的选项？";
+            }
+        }
+    </script>
+</body>
+</html>
