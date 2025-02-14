@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>足球乐园</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #007bff;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .game {
+            text-align: center;
+        }
+        .game canvas {
+            border: 2px solid #007bff;
+            background-color: #fff;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>足球乐园</h1>
+        <p>探索足球的魅力，享受足球的乐趣！</p>
+    </header>
+
+    <div class="container">
+        <!-- 足球知识 -->
+        <div class="section">
+            <h2>足球小知识</h2>
+            <p>足球是世界上最受欢迎的运动之一，起源于中国古代的蹴鞠。现代足球的规则由国际足球联合会（FIFA）制定。</p>
+            <p>一场标准的足球比赛分为上下半场，每半场45分钟，中场休息15分钟。</p>
+        </div>
+
+        <!-- 足球视频 -->
+        <div class="section">
+            <h2>精彩瞬间</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- 足球小游戏 -->
+        <div class="section">
+            <h2>点球大战小游戏</h2>
+            <div class="game">
+                <canvas id="gameCanvas" width="400" height="200"></canvas>
+                <button onclick="startGame()">开始游戏</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 足球乐园</p>
+    </footer>
+
+    <script>
+        // 点球大战小游戏逻辑
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let ball = { x: 200, y: 150, radius: 10, speed: 5 };
+        let goal = { x: 150, y: 100, width: 100, height: 50 };
+        let score = 0;
+
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'black';
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function drawGoal() {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(goal.x, goal.y, goal.width, goal.height);
+            ctx.strokeStyle = 'black';
+            ctx.strokeRect(goal.x, goal.y, goal.width, goal.height);
+        }
+
+        function drawScore() {
+            ctx.fillStyle = 'black';
+            ctx.font = '20px Arial';
+            ctx.fillText('得分: ' + score, canvas.width - 80, 20);
+        }
+
+        function update() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawGoal();
+            drawBall();
+            drawScore();
+
+            if (ball.y < goal.y + goal.height && ball.y > goal.y && ball.x > goal.x && ball.x < goal.x + goal.width) {
+                score++;
+                ball.y = 150;
+            } else {
+                ball.y -= ball.speed;
+            }
+        }
+
+        function startGame() {
+            ball.y = 150;
+            setInterval(update, 20);
+        }
+    </script>
+</body>
+</html>
