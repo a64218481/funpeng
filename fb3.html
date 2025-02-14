@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你在球场上最适合的位置</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            max-width: 300px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>你在球场上最适合的位置</h1>
+    </header>
+
+    <div class="container">
+        <h2>输入你的信息，看看你在球场上的最佳位置！</h2>
+        <input type="text" id="name" placeholder="你的名字">
+        <input type="number" id="height" placeholder="身高（厘米）">
+        <input type="number" id="weight" placeholder="体重（公斤）">
+        <button onclick="getPosition()">查看结果</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 专业足球位置测试</p>
+    </footer>
+
+    <script>
+        function getPosition() {
+            const name = document.getElementById('name').value;
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const resultDiv = document.getElementById('result');
+
+            // 判断逻辑
+            if (!name || isNaN(height) || isNaN(weight)) {
+                resultDiv.textContent = "请输入完整的信息！";
+                resultDiv.style.color = "red";
+                return;
+            }
+
+            // 假设标准：身高160cm以上，体重50kg以上
+            if (height < 160 || weight < 50) {
+                resultDiv.textContent = `"${name}"，身材那么好，适合去会所当鸭王！`;
+                resultDiv.style.color = "#FF5733";
+            } else {
+                resultDiv.textContent = `"${name}"，你不适合踢球，适合在电视前看球！`;
+                resultDiv.style.color = "#4CAF50";
+            }
+        }
+    </script>
+</body>
+</html>
